@@ -9,6 +9,7 @@ const initialState = {
   lastName: "",
   phone: "",
   mail: "",
+  errorMessage: "",
 };
 
 const reducer = (state, action) => {
@@ -21,6 +22,8 @@ const reducer = (state, action) => {
       return { ...state, phone: action.value };
     case "setMail":
       return { ...state, mail: action.value };
+    case "setErrorMessage":
+      return { ...state, errorMessage: action.value };
     default:
       return state;
   }
@@ -51,7 +54,12 @@ function App() {
   return (
     <>
       <h1 className="text-center text-white mb-5">Mon carnet d'adresse</h1>
-      <ContactTable contactList={contactList} />
+      <ContactTable
+        contactList={contactList}
+        setContactList={setContactList}
+        state={state}
+        dispatch={dispatch}
+      />
       <FormContact state={state} dispatch={dispatch} addContact={addContact} />
     </>
   );
